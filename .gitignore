@@ -27,3 +27,19 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+.DS_Store
+coverage
+brakeman.*
+
+ansible/.vault_pass
+
+.env
+.env.example
+.env.local
+.env.staging
+
+
+shared/*
+
+config/credentials.yml.enc
