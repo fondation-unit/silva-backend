@@ -312,6 +312,12 @@ Devise.setup do |config|
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
 
+  config.warden do |warden|
+    warden.scope_defaults :user, store: false  # This will use the config even if it's not passed to the method opts
+    warden.scope_defaults :admin, store: false # You need to configure it for each scope you need it for
+    # you might also want to overwrite the FailureApp in this section
+  end
+
   config.jwt do |jwt|
     jwt.secret = Rails.application.credentials.fetch(:secret_key_base)
     jwt.dispatch_requests = [
