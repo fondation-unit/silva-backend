@@ -3,22 +3,6 @@
 class Users::SessionsController < Devise::SessionsController
   respond_to :json
 
-=begin
-  def create
-    puts "*" * 50
-    puts params
-    user = User.find_by(email: params[:email])
-    puts user.inspect
-    render json: {
-      status: 401,
-      message: "Couldn't find any user."
-    }, status: :unauthorized unless user
-
-    if 
-    puts "*" * 50
-  end
-=end
-
   private
 
     def respond_with(resource, _opts = {})
