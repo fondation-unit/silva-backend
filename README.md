@@ -1,24 +1,14 @@
-# README
+Silva-Backend
+===
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## API documentation
 
-Things you may want to cover:
+**User endpoints :**
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+|Endpoint|Method|Parameters|Description|
+|--------|------|----------|-----------|
+|**/signup**|POST|`user[email]` `user[password]`|User signup|
+|**/login**|POST|`user[email]` `user[password]`|User login|
+|**/password**|POST|`user[email]`|Password recover request|
+|**/password**|PATCH|`user[reset_password_token]` `user[password]` `user[password_confirmation]`|Password change request|
+|**/current_user**|PATCH|Bearer token|Current user object|
