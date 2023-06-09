@@ -48,3 +48,5 @@ end
 
 gem "dotenv-rails", require: "dotenv/rails-now", groups: [:development, :test]
 gem "devise"
+gem "devise-jwt"
+gem "jsonapi-serializer"
