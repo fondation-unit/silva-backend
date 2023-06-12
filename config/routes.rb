@@ -11,4 +11,10 @@ Rails.application.routes.draw do
 
   get "/current_user", to: "current_user#index"
   get "/admin", to: "admin#index"
+
+  namespace :api do
+    namespace :v1 do
+      resources :scenarii
+    end
+  end
 end
