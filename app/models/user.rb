@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  require "string"
   include Devise::JWT::RevocationStrategies::JTIMatcher
   include Roleable
 
   USER_NAME_REGEX = /[^a-zéèàùïöüâêîôû\s-]/i
 
-  before_save :cleanup_username
+  before_validation :cleanup_username
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -14,9 +15,9 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable, :trackable,
          :validatable, :jwt_authenticatable, jwt_revocation_strategy: self
 
-  validates :email, uniqueness: true
-  validates :firstname, presence: true
-  validates :lastname, presence: true
+  validates :email, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :firstname, presence: true, length: { in: 2..30 }
+  validates :lastname, presence: true, length: { in: 2..30 }
 
   private
 
