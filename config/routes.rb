@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   }
 
   get "/current_user", to: "current_user#index"
+  patch "/current_user", to: "current_user#update"
   get "/admin", to: "admin#index"
 
   namespace :api do
