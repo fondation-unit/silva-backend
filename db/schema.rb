@@ -11,9 +11,16 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_07_03_153810) do
+  create_table "animal_scientific_orders", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "cards", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.text "description"
+    t.text "note"
     t.string "typeable_type"
     t.bigint "typeable_id"
     t.datetime "created_at", null: false
@@ -22,12 +29,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_153810) do
   end
 
   create_table "faunas", charset: "utf8mb4", force: :cascade do |t|
-    t.string "scientific_class"
+    t.bigint "animal_scientific_order_id"
     t.string "habitat"
     t.string "micro_habitat"
     t.string "predator"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["animal_scientific_order_id"], name: "index_faunas_on_animal_scientific_order_id"
   end
 
   create_table "faunas_predators", charset: "utf8mb4", force: :cascade do |t|
@@ -83,6 +91,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_153810) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "faunas", "animal_scientific_orders"
   add_foreign_key "faunas_predators", "faunas"
   add_foreign_key "faunas_predators", "faunas", column: "predator_id"
 end

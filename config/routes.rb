@@ -17,4 +17,6 @@ Rails.application.routes.draw do
       resources :scenarii
     end
   end
+
+  post "/faunas", to: "faunas#create"
 end
