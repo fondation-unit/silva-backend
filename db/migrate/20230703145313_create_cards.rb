@@ -4,11 +4,8 @@ class CreateCards < ActiveRecord::Migration[7.0]
       t.string :name
       t.text :description
       t.references :typeable, polymorphic: true
-      t.timestamps
 
-      # polymorphic
-      t.bigint  :typeable_id
-      t.string  :typeable_type
+      t.timestamps
     end
   end
 end

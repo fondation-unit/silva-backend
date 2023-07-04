@@ -1,6 +1,8 @@
 class CreateJoinTableFaunasPredators < ActiveRecord::Migration[7.0]
   def change
-    t.references :fauna_id, null: false, foreign_key: true
-    t.references :predator_id, null: false, foreign_key: true
+    create_table :faunas_predators do |t|
+      t.references :fauna, foreign_key: {to_table: :faunas}
+      t.references :predator, foreign_key: {to_table: :faunas}
+    end
   end
 end

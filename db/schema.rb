@@ -10,7 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_12_100315) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_03_153810) do
+  create_table "cards", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "typeable_type"
+    t.bigint "typeable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["typeable_type", "typeable_id"], name: "index_cards_on_typeable"
+  end
+
+  create_table "faunas", charset: "utf8mb4", force: :cascade do |t|
+    t.string "scientific_class"
+    t.string "habitat"
+    t.string "micro_habitat"
+    t.string "predator"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "faunas_predators", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "fauna_id"
+    t.bigint "predator_id"
+    t.index ["fauna_id"], name: "index_faunas_predators_on_fauna_id"
+    t.index ["predator_id"], name: "index_faunas_predators_on_predator_id"
+  end
+
+  create_table "floras", charset: "utf8mb4", force: :cascade do |t|
+    t.string "associated_species"
+    t.string "buildup_speed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "scenarii", charset: "utf8mb4", force: :cascade do |t|
     t.string "author"
     t.string "name"
@@ -50,4 +83,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_12_100315) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "faunas_predators", "faunas"
+  add_foreign_key "faunas_predators", "faunas", column: "predator_id"
 end
