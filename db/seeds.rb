@@ -11,3 +11,4 @@
     description: Faker::Markdown.emphasis
   )
 }
+
