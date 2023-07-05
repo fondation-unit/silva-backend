@@ -24,3 +24,14 @@ class Flora < ApplicationRecord
     validates :buildup_speed, presence: true
 
 end
+
+# == Schema Information
+#
+# Table name: floras
+#
+#  id                 :bigint           not null, primary key
+#  associated_species :string(255)
+#  buildup_speed      :string(255)
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
