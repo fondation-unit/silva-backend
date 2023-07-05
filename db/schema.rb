@@ -29,13 +29,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_153810) do
   end
 
   create_table "faunas", charset: "utf8mb4", force: :cascade do |t|
-    t.bigint "animal_scientific_order_id"
-    t.string "habitat"
-    t.string "micro_habitat"
-    t.string "predator"
+    t.bigint "animal_scientific_order_id", null: false
+    t.bigint "habitat_id", null: false
+    t.bigint "micro_habitat_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["animal_scientific_order_id"], name: "index_faunas_on_animal_scientific_order_id"
+    t.index ["habitat_id"], name: "index_faunas_on_habitat_id"
+    t.index ["micro_habitat_id"], name: "index_faunas_on_micro_habitat_id"
   end
 
   create_table "faunas_predators", charset: "utf8mb4", force: :cascade do |t|
@@ -48,6 +49,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_153810) do
   create_table "floras", charset: "utf8mb4", force: :cascade do |t|
     t.string "associated_species"
     t.string "buildup_speed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "habitats", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "micro_habitats", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -92,6 +105,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_153810) do
   end
 
   add_foreign_key "faunas", "animal_scientific_orders"
+  add_foreign_key "faunas", "habitats"
+  add_foreign_key "faunas", "micro_habitats"
   add_foreign_key "faunas_predators", "faunas"
   add_foreign_key "faunas_predators", "faunas", column: "predator_id"
 end
