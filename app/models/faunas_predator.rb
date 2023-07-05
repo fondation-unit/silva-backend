@@ -1,6 +1,6 @@
 class FaunasPredator < ApplicationRecord
-  belongs_to :fauna, class_name: 'Fauna', foreign_key: :fauna_id
-  belongs_to :predator, class_name: 'Fauna', foreign_key: :predator_id
+  belongs_to :fauna, class_name: "Fauna", foreign_key: :fauna_id
+  belongs_to :predator, class_name: "Fauna", foreign_key: :predator_id
 end
 
 # == Schema Information

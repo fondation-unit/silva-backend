@@ -1,14 +1,10 @@
-class MicroHabitat < ApplicationRecord
+class Species < ApplicationRecord
 
-  has_many :faunas
-
-  validates :name, presence: true 
-    
 end
 
 # == Schema Information
 #
-# Table name: micro_habitats
+# Table name: species
 #
 #  id         :bigint           not null, primary key
 #  name       :string(255)

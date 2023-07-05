@@ -14,50 +14,57 @@
 }
 =end
 
-habitat1 = Habitat.create!(
-  name: :woodforest
-)
-habitat2 = Habitat.create!(
-  name: :pineforest
-)
-habitat3 = Habitat.create!(
-  name: :plain
-)
-habitat4 = Habitat.create!(
-  name: :glade
-)
-habitat5 = Habitat.create!(
-  name: :swamp
+=begin 
+VARIABLE
+=end
+builduSpeedType = ["slow", "medium", "fast"]
+
+%i[birds mammals reptiles amphibians insects arachnids arthropods fungi bacteria].each do |type|
+  Species.create!(name: type)
+end
+
+%i[woodforest pineforest plain glade swamp].each do |type|
+  Habitat.create!(name: type)
+end
+
+%i[moss leaf dead_leaf log rotten_log].each do |type|
+  MicroHabitat.create!(name: type)
+end
+
+%i[canidae felidae equidae bovidae aves].each do |type|
+  AnimalScientificOrder.create!(name: type)
+end
+
+species = Species.all
+habitat = Habitat.all
+micro_habitat = MicroHabitat.all
+animalScientificOrder = AnimalScientificOrder.all
+
+
+=begin 
+FLORA
+=end
+flora = Flora.create!(
+  buildup_speed: builduSpeedType.sample
 )
 
-micro_habitat1 = MicroHabitat.create!(
-  name: :moss
-)
-micro_habitat2 = MicroHabitat.create!(
-  name: :leaf
-)
-micro_habitat3 = MicroHabitat.create!(
-  name: :dead_leaf
-)
-micro_habitat4 = MicroHabitat.create!(
-  name: :log
-)
-micro_habitat5 = MicroHabitat.create!(
-  name: :rotten_log
+floras_species = FlorasSpecies.create!(
+  flora: flora,
+  species: species.sample
 )
 
-predator_order = AnimalScientificOrder.create!(name: "Dinosaures")
-order = AnimalScientificOrder.create!(name: "Volatiles")
-
+=begin 
+FAUNA
+=end
 predator1 = Fauna.create!(
-  animal_scientific_order: predator_order,
-  habitat: habitat1,
-  micro_habitat: micro_habitat2
+  animal_scientific_order: animalScientificOrder.sample,
+  habitat: habitat.sample,
+  micro_habitat: micro_habitat.sample
 )
 predator2 = Fauna.create!(
-  animal_scientific_order: predator_order,
-  habitat: habitat1,
-  micro_habitat: micro_habitat2
+  animal_scientific_order: animalScientificOrder.sample,
+  habitat: habitat.sample,
+  micro_habitat: micro_habitat.sample
 )
 predator1.build_card(
   typeable: predator1,
@@ -70,18 +77,40 @@ predator2.build_card(
   description: Faker::Markdown.emphasis
 ).save
 
+
 fauna = Fauna.create!(
-  animal_scientific_order: order,
-  habitat: habitat1,
-  micro_habitat: micro_habitat2
+  animal_scientific_order: animalScientificOrder.sample,
+  habitat: habitat.sample,
+  micro_habitat: micro_habitat.sample
 )
 
+
+=begin 
+CARD
+=end
 card = fauna.build_card(
   typeable: fauna,
   name: Faker::Name.name, 
   description: Faker::Markdown.emphasis
 )
-card.save
 
+5.times {  |index| 
+  Card.create!(
+    typeable: fauna,
+    name: Faker::Name.name, 
+    description: Faker::Markdown.emphasis
+  )
+}
+
+5.times { |index| 
+  Card.create!(
+    typeable: flora,
+    name: Faker::Name.name, 
+    description: Faker::Markdown.emphasis
+  )
+}
+
+
+card.save
 fauna.predators << [predator1, predator2]
 
