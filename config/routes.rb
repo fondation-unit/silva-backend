@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   end
 
   post "/faunas", to: "faunas#create"
+  post "/floras", to: "floras#create"
 end

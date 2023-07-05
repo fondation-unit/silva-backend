@@ -1,5 +1,7 @@
 class Flora < ApplicationRecord
 
+    has_one :card, as: :typeable, dependent: :destroy
+
     enum associated_species: { 
         birds: 0, 
         mammals: 1, 
@@ -18,7 +20,7 @@ class Flora < ApplicationRecord
         fast: 2
     }
 
-    validates :ssociated_species, presence: false
+    validates :associated_species, presence: false
     validates :buildup_speed, presence: true
 
 end

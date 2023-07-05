@@ -6,8 +6,10 @@ class FaunasController < ApplicationController
     def create
         @fauna = Fauna.new(fauna_params)
         if @fauna.save
-            @card = @fauna.build_card(typeable: fauna_params[:typeable], name: "test", description: "test desc")
+            @card = @fauna.build_card(typeable: fauna_params[:typeable], name: name, description: description)
             @card.save
+
+            @fauna.predators.build(fauna_id: @fauna, predator_id: fauna_params[:predator])
         end
     end
 
