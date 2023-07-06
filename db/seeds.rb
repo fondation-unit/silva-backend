@@ -13,10 +13,8 @@
   )
 }
 =end
-
-=begin 
-VARIABLE
-=end
+ 
+# VARIABLES
 builduSpeedType = ["slow", "medium", "fast"]
 
 %i[birds mammals reptiles amphibians insects arachnids arthropods fungi bacteria].each do |type|
@@ -36,14 +34,11 @@ end
 end
 
 species = Species.all
-habitat = Habitat.all
-micro_habitat = MicroHabitat.all
-animalScientificOrder = AnimalScientificOrder.all
+habitats = Habitat.all
+micro_habitats = MicroHabitat.all
+animal_scientific_orders = AnimalScientificOrder.all
 
-
-=begin 
-FLORA
-=end
+# FLORA
 flora = Flora.create!(
   buildup_speed: builduSpeedType.sample
 )
@@ -53,55 +48,26 @@ floras_species = FlorasSpecies.create!(
   species: species.sample
 )
 
-=begin 
-FAUNA
-=end
-predator1 = Fauna.create!(
-  animal_scientific_order: animalScientificOrder.sample,
-  habitat: habitat.sample,
-  micro_habitat: micro_habitat.sample
-)
-predator2 = Fauna.create!(
-  animal_scientific_order: animalScientificOrder.sample,
-  habitat: habitat.sample,
-  micro_habitat: micro_habitat.sample
-)
-predator1.build_card(
-  typeable: predator1,
-  name: Faker::Name.name, 
-  description: Faker::Markdown.emphasis
-).save
-predator2.build_card(
-  typeable: predator2,
-  name: Faker::Name.name, 
-  description: Faker::Markdown.emphasis
-).save
-
-
-fauna = Fauna.create!(
-  animal_scientific_order: animalScientificOrder.sample,
-  habitat: habitat.sample,
-  micro_habitat: micro_habitat.sample
-)
-
-
-=begin 
-CARD
-=end
-card = fauna.build_card(
-  typeable: fauna,
-  name: Faker::Name.name, 
-  description: Faker::Markdown.emphasis
-)
-
-5.times {  |index| 
-  Card.create!(
+# FAUNA
+5.times { |index| 
+  fauna = Fauna.create!(
+    animal_scientific_order: animal_scientific_orders.sample
+  )
+  card = fauna.build_card(
     typeable: fauna,
     name: Faker::Name.name, 
     description: Faker::Markdown.emphasis
   )
+  card.save
+
+  fauna.predators << (1..4).map { Fauna.all.sample }
+  fauna.habitats << habitats.sample
+  fauna.micro_habitats << micro_habitats.sample
 }
 
+fauna = Fauna.first
+
+# CARD
 5.times { |index| 
   Card.create!(
     typeable: flora,
@@ -109,8 +75,3 @@ card = fauna.build_card(
     description: Faker::Markdown.emphasis
   )
 }
-
-
-card.save
-fauna.predators << [predator1, predator2]
-

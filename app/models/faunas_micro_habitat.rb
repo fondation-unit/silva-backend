@@ -1,11 +1,11 @@
-class FaunaMicroHabitat < ApplicationRecord
+class FaunasMicroHabitat < ApplicationRecord
   belongs_to :fauna
   belongs_to :micro_habitat
 end
 
 # == Schema Information
 #
-# Table name: fauna_micro_habitats
+# Table name: faunas_micro_habitats
 #
 #  id               :bigint           not null, primary key
 #  created_at       :datetime         not null
@@ -15,8 +15,8 @@ end
 #
 # Indexes
 #
-#  index_fauna_micro_habitats_on_fauna_id          (fauna_id)
-#  index_fauna_micro_habitats_on_micro_habitat_id  (micro_habitat_id)
+#  index_faunas_micro_habitats_on_fauna_id          (fauna_id)
+#  index_faunas_micro_habitats_on_micro_habitat_id  (micro_habitat_id)
 #
 # Foreign Keys
 #

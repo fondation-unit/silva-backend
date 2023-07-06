@@ -28,33 +28,29 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_124131) do
     t.index ["typeable_type", "typeable_id"], name: "index_cards_on_typeable"
   end
 
-  create_table "fauna_habitats", charset: "utf8mb4", force: :cascade do |t|
-    t.bigint "fauna_id", null: false
-    t.bigint "habitat_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["fauna_id"], name: "index_fauna_habitats_on_fauna_id"
-    t.index ["habitat_id"], name: "index_fauna_habitats_on_habitat_id"
-  end
-
-  create_table "fauna_micro_habitats", charset: "utf8mb4", force: :cascade do |t|
-    t.bigint "fauna_id", null: false
-    t.bigint "micro_habitat_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["fauna_id"], name: "index_fauna_micro_habitats_on_fauna_id"
-    t.index ["micro_habitat_id"], name: "index_fauna_micro_habitats_on_micro_habitat_id"
-  end
-
   create_table "faunas", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "animal_scientific_order_id", null: false
-    t.bigint "habitat_id", null: false
-    t.bigint "micro_habitat_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["animal_scientific_order_id"], name: "index_faunas_on_animal_scientific_order_id"
-    t.index ["habitat_id"], name: "index_faunas_on_habitat_id"
-    t.index ["micro_habitat_id"], name: "index_faunas_on_micro_habitat_id"
+  end
+
+  create_table "faunas_habitats", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "fauna_id", null: false
+    t.bigint "habitat_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fauna_id"], name: "index_faunas_habitats_on_fauna_id"
+    t.index ["habitat_id"], name: "index_faunas_habitats_on_habitat_id"
+  end
+
+  create_table "faunas_micro_habitats", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "fauna_id", null: false
+    t.bigint "micro_habitat_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fauna_id"], name: "index_faunas_micro_habitats_on_fauna_id"
+    t.index ["micro_habitat_id"], name: "index_faunas_micro_habitats_on_micro_habitat_id"
   end
 
   create_table "faunas_predators", charset: "utf8mb4", force: :cascade do |t|
@@ -136,13 +132,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_124131) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "fauna_habitats", "faunas"
-  add_foreign_key "fauna_habitats", "habitats"
-  add_foreign_key "fauna_micro_habitats", "faunas"
-  add_foreign_key "fauna_micro_habitats", "micro_habitats"
   add_foreign_key "faunas", "animal_scientific_orders"
-  add_foreign_key "faunas", "habitats"
-  add_foreign_key "faunas", "micro_habitats"
+  add_foreign_key "faunas_habitats", "faunas"
+  add_foreign_key "faunas_habitats", "habitats"
+  add_foreign_key "faunas_micro_habitats", "faunas"
+  add_foreign_key "faunas_micro_habitats", "micro_habitats"
   add_foreign_key "faunas_predators", "faunas"
   add_foreign_key "faunas_predators", "faunas", column: "predator_id"
   add_foreign_key "floras_species", "floras"
