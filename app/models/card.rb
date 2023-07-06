@@ -1,6 +1,6 @@
 class Card < ApplicationRecord
 
-  belongs_to :typeable, polymorphic: true
+  belongs_to :typeable, polymorphic: true, optional: true
 
   validates :name, presence: true
   validates :description, presence: true

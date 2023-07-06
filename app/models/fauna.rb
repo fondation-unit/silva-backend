@@ -13,6 +13,19 @@ class Fauna < ApplicationRecord
     has_many :micro_habitats, through: :faunas_micro_habitats
 
     validates :animal_scientific_order, presence: true
+
+    accepts_nested_attributes_for :card, :habitats, :micro_habitats, :predators
+
+
+    def build_associations(params)
+        create_card(params[:card_attributes])
+
+        habitats = Habitat.where(id: [params[:habitats_attributes]])
+        self.habitats << habitats
+
+        microhabitats = MicroHabitat.where(id: [params[:micro_habitats_attributes]])
+        self.micro_habitats << microhabitats
+    end
 end
 
 # == Schema Information
