@@ -19,5 +19,5 @@ end
 # Foreign Keys
 #
 #  fk_rails_...  (fauna_id => faunas.id)
-#  fk_rails_...  (predator_id => faunas.id)
+#  fk_rails_...  (predator_id => faunas.id) ON DELETE => cascade
 #

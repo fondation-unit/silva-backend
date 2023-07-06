@@ -26,6 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_124131) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["typeable_type", "typeable_id"], name: "index_cards_on_typeable"
+    t.index ["typeable_type", "typeable_id"], name: "index_cards_on_typeable_type_and_typeable_id", unique: true
   end
 
   create_table "faunas", charset: "utf8mb4", force: :cascade do |t|
@@ -138,7 +139,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_124131) do
   add_foreign_key "faunas_micro_habitats", "faunas"
   add_foreign_key "faunas_micro_habitats", "micro_habitats"
   add_foreign_key "faunas_predators", "faunas"
-  add_foreign_key "faunas_predators", "faunas", column: "predator_id"
+  add_foreign_key "faunas_predators", "faunas", column: "predator_id", on_delete: :cascade
   add_foreign_key "floras_species", "floras"
   add_foreign_key "floras_species", "species"
 end

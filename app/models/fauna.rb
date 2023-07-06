@@ -3,13 +3,13 @@ class Fauna < ApplicationRecord
     belongs_to :animal_scientific_order, class_name: 'AnimalScientificOrder', foreign_key: :animal_scientific_order_id
     has_one :card, as: :typeable, dependent: :destroy
 
-    has_many :faunas_predators
+    has_many :faunas_predators, dependent: :delete_all
     has_many :predators, through: :faunas_predators
 
-    has_many :faunas_habitats, dependent: :nullify
+    has_many :faunas_habitats, dependent: :delete_all
     has_many :habitats, through: :faunas_habitats
 
-    has_many :faunas_micro_habitats, dependent: :nullify
+    has_many :faunas_micro_habitats, dependent: :delete_all
     has_many :micro_habitats, through: :faunas_micro_habitats
 
     validates :animal_scientific_order, presence: true
@@ -26,6 +26,22 @@ class Fauna < ApplicationRecord
         microhabitats = MicroHabitat.where(id: [params[:micro_habitats_attributes]])
         self.micro_habitats << microhabitats
 
+        predators = Fauna.where(id: [params[:predators_attributes]])
+        self.predators << predators
+    end
+
+    def update_associations(params)
+        card.update(params[:card_attributes])
+
+        self.habitats.delete_all
+        new_habitats = Habitat.where(id: [params[:habitats_attributes]])
+        self.habitats << new_habitats
+
+        self.micro_habitats.delete_all
+        microhabitats = MicroHabitat.where(id: [params[:micro_habitats_attributes]])
+        self.micro_habitats << microhabitats
+
+        self.predators.delete_all
         predators = Fauna.where(id: [params[:predators_attributes]])
         self.predators << predators
     end

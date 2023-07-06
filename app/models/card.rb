@@ -25,5 +25,6 @@ end
 #
 # Indexes
 #
-#  index_cards_on_typeable  (typeable_type,typeable_id)
+#  index_cards_on_typeable                       (typeable_type,typeable_id)
+#  index_cards_on_typeable_type_and_typeable_id  (typeable_type,typeable_id) UNIQUE
 #

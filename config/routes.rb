@@ -20,11 +20,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :faunas
-
+  resources :faunas, only: [:create, :update, :destroy]
   resources :floras
 
-  post "/api/v1/faunas", to: "faunas#create"
   post "/api/v1/floras", to: "floras#create"
 
 end

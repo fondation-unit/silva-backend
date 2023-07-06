@@ -38,16 +38,6 @@ habitats = Habitat.all
 micro_habitats = MicroHabitat.all
 animal_scientific_orders = AnimalScientificOrder.all
 
-# FLORA
-flora = Flora.create!(
-  buildup_speed: builduSpeedType.sample
-)
-
-floras_species = FlorasSpecies.create!(
-  flora: flora,
-  species: species.sample
-)
-
 # FAUNA
 5.times { |index| 
   fauna = Fauna.create!(
@@ -68,7 +58,15 @@ floras_species = FlorasSpecies.create!(
 fauna = Fauna.first
 
 # CARD
-5.times { |index| 
+5.times { |index|
+  flora = Flora.create!(
+    buildup_speed: builduSpeedType.sample
+  )
+
+  floras_species = FlorasSpecies.create!(
+    flora: flora,
+    species: species.sample
+  ) 
   Card.create!(
     typeable: flora,
     name: Faker::Name.name, 

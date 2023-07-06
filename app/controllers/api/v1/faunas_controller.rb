@@ -28,6 +28,22 @@ class Api::V1::FaunasController < ApplicationController
         end
     end
 
+    def update
+        @fauna = Fauna.find(params[:id])
+        if @fauna.update(animal_scientific_order_id: fauna_params[:animal_scientific_order_id])
+            @fauna.update_associations(fauna_params)
+            return render json: {
+                status: { code: 200, message: "Fauna updated successfully." },
+                data: FaunaSerializer.new(@fauna)
+            }
+        end
+    end
+
+    def destroy
+        @fauna = Fauna.find(params[:id])
+        @fauna.destroy
+    end
+
     private
 
         def fauna_params
