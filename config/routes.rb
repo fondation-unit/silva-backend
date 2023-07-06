@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   resources :floras
 
-  post "/faunas", to: "faunas#create"
-  post "/floras", to: "floras#create"
+  post "/api/v1/faunas", to: "faunas#create"
+  post "/api/v1/floras", to: "floras#create"
 
 end

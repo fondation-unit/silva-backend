@@ -25,6 +25,9 @@ class Fauna < ApplicationRecord
 
         microhabitats = MicroHabitat.where(id: [params[:micro_habitats_attributes]])
         self.micro_habitats << microhabitats
+
+        predators = Fauna.where(id: [params[:predators_attributes]])
+        self.predators << predators
     end
 end
 
