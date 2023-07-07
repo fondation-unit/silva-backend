@@ -15,8 +15,8 @@ end
 #
 # Table name: floras
 #
-#  id      :bigint       not null, primary key
+#  id            :bigint           not null, primary key
 #  buildup_speed :string(255)
-#  created_at  :datetime     not null
-#  updated_at  :datetime     not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #
