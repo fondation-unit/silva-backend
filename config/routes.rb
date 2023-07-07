@@ -1,4 +1,4 @@
-Rails.application.routes.draw do  
+Rails.application.routes.draw do
   devise_for :users, path: "", path_names: {
     sign_in: "login",
     sign_out: "logout",
@@ -23,5 +23,4 @@ Rails.application.routes.draw do
 
   resources :faunas, only: [:create, :update, :destroy]
   resources :floras, only: [:create, :update, :destroy]
-
 end

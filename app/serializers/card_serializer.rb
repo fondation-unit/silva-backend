@@ -4,6 +4,11 @@ class CardSerializer
   include JSONAPI::Serializer
 
   attributes :name
+  #attributes :medias
+
+  attribute :medias_files do |object|
+    object.medias&.map { |media| Rails.application.routes.url_helpers.url_for(media) }
+  end
 end
 
 # == Schema Information
