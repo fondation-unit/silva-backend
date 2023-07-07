@@ -29,7 +29,23 @@ class Api::V1::FlorasController < ApplicationController
     }
   end
 
+  def update
+    @flora = Flora.find(params[:id])
 
+    return unless @flora.update(buildup_speed: flora_params[:buildup_speed])
+
+    @flora.update_associations(flora_params)
+
+    render json: {
+      status: { code: 200, message: "Flora updated successfully." },
+      data: FloraSerializer.new(@flora)
+    }
+  end
+
+  def destroy
+    @flora = Flora.find(params[:id])
+    @flora.destroy
+  end
 
   private
 
