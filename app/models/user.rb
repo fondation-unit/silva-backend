@@ -19,6 +19,12 @@ class User < ApplicationRecord
   validates :firstname, presence: true, length: { in: 2..30 }
   validates :lastname, presence: true, length: { in: 2..30 }
 
+  def self.confirmed?
+    return true if confirmed_at != nil
+
+    false
+  end
+
   private
 
     def cleanup_username
