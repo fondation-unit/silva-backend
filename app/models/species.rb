@@ -1,5 +1,4 @@
 class Species < ApplicationRecord
-
 end
 
 # == Schema Information

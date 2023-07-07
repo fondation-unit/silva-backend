@@ -1,9 +1,7 @@
 class AnimalScientificOrder < ApplicationRecord
+  has_many :faunas, dependent: :destroy
 
-    has_many :faunas
-
-    validates :name, presence: true 
-
+  validates :name, presence: true
 end
 
 # == Schema Information

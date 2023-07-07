@@ -8,7 +8,7 @@ class CurrentUserController < ApplicationController
   end
 
   def update
-    if current_user && current_user.update(user_params)
+    if current_user&.update(user_params)
       return render json: {
         status: { code: 200, message: "Profile updated successfully." },
         data: UserSerializer.new(current_user).serializable_hash[:data][:attributes]

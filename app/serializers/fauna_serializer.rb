@@ -10,7 +10,6 @@ class FaunaSerializer
   has_many :habitats
   has_many :micro_habitats
   has_many :predators
-
 end
 
 # == Schema Information

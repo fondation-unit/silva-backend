@@ -21,11 +21,10 @@ class User < ApplicationRecord
 
   private
 
-  def cleanup_username
-    self.firstname = firstname.gsub(USER_NAME_REGEX, "").to_s.patronize
-    self.lastname = lastname.gsub(USER_NAME_REGEX, "").to_s.patronize
-  end
-
+    def cleanup_username
+      self.firstname = firstname.gsub(USER_NAME_REGEX, "").to_s.patronize
+      self.lastname = lastname.gsub(USER_NAME_REGEX, "").to_s.patronize
+    end
 end
 
 # == Schema Information

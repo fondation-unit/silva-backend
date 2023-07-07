@@ -6,8 +6,8 @@ class PredatorSerializer
   attributes :id
 
   attribute :card_name do |object|
-    object.card && object.card.name
-  end  
+    object.card&.name
+  end
 
   has_one :card
 end
