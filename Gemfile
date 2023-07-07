@@ -40,7 +40,10 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 
+  gem "capybara"
   gem "faker"
+  gem "factory_bot_rails"
+  gem "minitest"
 end
 
 group :development do
@@ -48,6 +51,15 @@ group :development do
   # gem "spring"
 
   gem "annotate"
+  gem "bullet"
+  gem "brakeman"
+  gem "reek"
+  gem "guard"
+  gem "guard-minitest"
+  gem "guard-rubocop"
+  gem "guard-reek"
+  gem "rubocop"
+  gem "rubocop-rails"
 end
 
 gem "dotenv-rails", require: "dotenv/rails-now", groups: [:development, :test]
