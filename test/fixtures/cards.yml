@@ -1,5 +1,5 @@
-lion:
-  name: Lion
+wolf:
+  name: Wolf
   description: "description test"
   note: "note test"
   typeable_type: "type test"

@@ -17,7 +17,7 @@ class CardTest < ActiveSupport::TestCase
   end
 
   test "name is too short" do
-    card = cards(:lion)
+    card = cards(:wolf)
     card.name = "AA"
 
     refute card.valid?, "card is not valid"

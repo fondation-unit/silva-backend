@@ -2,7 +2,7 @@ class MicroHabitat < ApplicationRecord
   has_many :faunas_micro_habitats, dependent: :destroy
   has_many :faunas, through: :faunas_micro_habitats
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { minimum: 3 }
 end
 
 # == Schema Information
