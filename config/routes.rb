@@ -16,6 +16,13 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :scenarii
+      resources :faunas
     end
   end
+
+  resources :faunas, only: [:create, :update, :destroy]
+  resources :floras
+
+  post "/api/v1/floras", to: "floras#create"
+
 end
