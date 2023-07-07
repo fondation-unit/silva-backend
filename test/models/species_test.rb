@@ -17,3 +17,13 @@ class SpeciesTest < ActiveSupport::TestCase
     assert_not_nil species.errors[:name], "no length error for name"
   end
 end
+
+# == Schema Information
+#
+# Table name: species
+#
+#  id         :bigint           not null, primary key
+#  name       :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
