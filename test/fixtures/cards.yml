@@ -1,0 +1,6 @@
+lion:
+  name: Lion
+  description: "description test"
+  note: "note test"
+  typeable_type: "type test"
+  typeable_id: 1
