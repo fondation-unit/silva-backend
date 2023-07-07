@@ -40,10 +40,10 @@ end
 #
 # Table name: faunas
 #
-#  id             :bigint       not null, primary key
-#  created_at         :datetime     not null
-#  updated_at         :datetime     not null
-#  animal_scientific_order_id :bigint       not null
+#  id                         :bigint           not null, primary key
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  animal_scientific_order_id :bigint           not null
 #
 # Indexes
 #

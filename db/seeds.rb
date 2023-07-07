@@ -2,6 +2,17 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
 
+# ADMIN USER
+User.create!(
+  firstname: "admin",
+  lastname: "user",
+  email: "admin@localhost.com",
+  password: "password",
+  confirmation_sent_at: DateTime.now(),
+  confirmed_at: DateTime.now()
+)
+
+# SCENARII
 22.times do |index|
   Scenario.create!(
     author: Faker::Name.name,
@@ -43,7 +54,7 @@ animal_scientific_orders = AnimalScientificOrder.all
   )
   card = fauna.build_card(
     typeable: fauna,
-    name: Faker::Name.name,
+    name: Faker::Creature::Animal.name,
     description: Faker::Markdown.emphasis
   )
   card.save
