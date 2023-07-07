@@ -1,14 +1,10 @@
-class AnimalScientificOrder < ApplicationRecord
-
-    has_many :faunas
-
-    validates :name, presence: true 
+class Species < ApplicationRecord
 
 end
 
 # == Schema Information
 #
-# Table name: animal_scientific_orders
+# Table name: species
 #
 #  id         :bigint           not null, primary key
 #  name       :string(255)

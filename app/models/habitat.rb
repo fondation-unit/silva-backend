@@ -1,14 +1,14 @@
-class AnimalScientificOrder < ApplicationRecord
+class Habitat < ApplicationRecord
 
-    has_many :faunas
+  has_many :faunas_habitats, dependent: :destroy
+  has_many :faunas, through: :faunas_habitats
 
-    validates :name, presence: true 
-
+  validates :name, presence: true
 end
 
 # == Schema Information
 #
-# Table name: animal_scientific_orders
+# Table name: habitats
 #
 #  id         :bigint           not null, primary key
 #  name       :string(255)

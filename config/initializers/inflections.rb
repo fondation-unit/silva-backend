@@ -20,4 +20,6 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
     inflect.singular /^(ox)en/i, '\1'
 
     inflect.irregular 'scenario', 'scenarii'
+    inflect.irregular 'species', 'species'
+    inflect.irregular 'floras_species', 'floras_species'
 end

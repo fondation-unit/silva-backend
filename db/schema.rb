@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_03_153810) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_05_124131) do
   create_table "animal_scientific_orders", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -26,16 +26,32 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_153810) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["typeable_type", "typeable_id"], name: "index_cards_on_typeable"
+    t.index ["typeable_type", "typeable_id"], name: "index_cards_on_typeable_type_and_typeable_id", unique: true
   end
 
   create_table "faunas", charset: "utf8mb4", force: :cascade do |t|
-    t.bigint "animal_scientific_order_id"
-    t.string "habitat"
-    t.string "micro_habitat"
-    t.string "predator"
+    t.bigint "animal_scientific_order_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["animal_scientific_order_id"], name: "index_faunas_on_animal_scientific_order_id"
+  end
+
+  create_table "faunas_habitats", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "fauna_id", null: false
+    t.bigint "habitat_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fauna_id"], name: "index_faunas_habitats_on_fauna_id"
+    t.index ["habitat_id"], name: "index_faunas_habitats_on_habitat_id"
+  end
+
+  create_table "faunas_micro_habitats", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "fauna_id", null: false
+    t.bigint "micro_habitat_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fauna_id"], name: "index_faunas_micro_habitats_on_fauna_id"
+    t.index ["micro_habitat_id"], name: "index_faunas_micro_habitats_on_micro_habitat_id"
   end
 
   create_table "faunas_predators", charset: "utf8mb4", force: :cascade do |t|
@@ -46,8 +62,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_153810) do
   end
 
   create_table "floras", charset: "utf8mb4", force: :cascade do |t|
-    t.string "associated_species"
     t.string "buildup_speed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "floras_species", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "flora_id", null: false
+    t.bigint "species_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flora_id"], name: "index_floras_species_on_flora_id"
+    t.index ["species_id"], name: "index_floras_species_on_species_id"
+  end
+
+  create_table "habitats", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "micro_habitats", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -58,6 +94,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_153810) do
     t.integer "level"
     t.string "subject"
     t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "species", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -92,6 +134,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_03_153810) do
   end
 
   add_foreign_key "faunas", "animal_scientific_orders"
+  add_foreign_key "faunas_habitats", "faunas"
+  add_foreign_key "faunas_habitats", "habitats"
+  add_foreign_key "faunas_micro_habitats", "faunas"
+  add_foreign_key "faunas_micro_habitats", "micro_habitats"
   add_foreign_key "faunas_predators", "faunas"
-  add_foreign_key "faunas_predators", "faunas", column: "predator_id"
+  add_foreign_key "faunas_predators", "faunas", column: "predator_id", on_delete: :cascade
+  add_foreign_key "floras_species", "floras"
+  add_foreign_key "floras_species", "species"
 end

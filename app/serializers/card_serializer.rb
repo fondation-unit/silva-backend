@@ -1,13 +1,9 @@
-class Card < ApplicationRecord
+# frozen_string_literal: true
 
-  belongs_to :typeable, polymorphic: true, optional: true
+class CardSerializer
+  include JSONAPI::Serializer
 
-  validates :name, presence: true
-  validates :description, presence: true
-  validates :note, presence: false
-  validates :typeable_type, presence: true
-  validates :typeable_id, presence: true
-
+  attributes :name
 end
 
 # == Schema Information

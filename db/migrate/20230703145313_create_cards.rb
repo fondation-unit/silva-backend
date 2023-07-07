@@ -8,5 +8,8 @@ class CreateCards < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
+
+    add_index :cards, [:typeable_type, :typeable_id], unique: true
+
   end
 end

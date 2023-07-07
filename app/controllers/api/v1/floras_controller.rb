@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FlorasController < ApplicationController
+class Api::V1::FlorasController < ApplicationController
     before_action :authenticate_user!
   
     def create

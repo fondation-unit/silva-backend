@@ -1,14 +1,14 @@
-class AnimalScientificOrder < ApplicationRecord
+# frozen_string_literal: true
 
-    has_many :faunas
+class HabitatSerializer
+  include JSONAPI::Serializer
 
-    validates :name, presence: true 
-
+  attributes :id, :name
 end
 
 # == Schema Information
 #
-# Table name: animal_scientific_orders
+# Table name: habitats
 #
 #  id         :bigint           not null, primary key
 #  name       :string(255)
