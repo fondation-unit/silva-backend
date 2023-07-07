@@ -1,5 +1,4 @@
 class Habitat < ApplicationRecord
-
   has_many :faunas_habitats, dependent: :destroy
   has_many :faunas, through: :faunas_habitats
 

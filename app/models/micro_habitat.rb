@@ -1,5 +1,4 @@
 class MicroHabitat < ApplicationRecord
-
   has_many :faunas_micro_habitats, dependent: :destroy
   has_many :faunas, through: :faunas_micro_habitats
 

@@ -1,5 +1,4 @@
 class Card < ApplicationRecord
-
   belongs_to :typeable, polymorphic: true, optional: true
 
   validates :name, presence: true
@@ -7,7 +6,6 @@ class Card < ApplicationRecord
   validates :note, presence: false
   validates :typeable_type, presence: true
   validates :typeable_id, presence: true
-
 end
 
 # == Schema Information

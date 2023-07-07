@@ -2,7 +2,7 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
 
-22.times { |index|
+22.times do |index|
   Scenario.create!(
     author: Faker::Name.name,
     name: "Scenario #{index + 1}",
@@ -10,10 +10,10 @@
     subject: Faker::Company.bs,
     description: Faker::Markdown.emphasis
   )
-}
- 
+end
+
 # VARIABLES
-builduSpeedType = ["slow", "medium", "fast"]
+buildup_speed_type = ["slow", "medium", "fast"]
 
 %i[birds mammals reptiles amphibians insects arachnids arthropods fungi bacteria].each do |type|
   Species.create!(name: type)
@@ -37,13 +37,13 @@ micro_habitats = MicroHabitat.all
 animal_scientific_orders = AnimalScientificOrder.all
 
 # FAUNA
-5.times { |index| 
+5.times do
   fauna = Fauna.create!(
     animal_scientific_order: animal_scientific_orders.sample
   )
   card = fauna.build_card(
     typeable: fauna,
-    name: Faker::Name.name, 
+    name: Faker::Name.name,
     description: Faker::Markdown.emphasis
   )
   card.save
@@ -51,23 +51,20 @@ animal_scientific_orders = AnimalScientificOrder.all
   fauna.predators << (1..4).map { Fauna.all.sample }
   fauna.habitats << habitats.sample
   fauna.micro_habitats << micro_habitats.sample
-}
-
-fauna = Fauna.first
+end
 
 # CARD
-5.times { |index|
+5.times do
   flora = Flora.create!(
-    buildup_speed: builduSpeedType.sample
+    buildup_speed: buildup_speed_type.sample
   )
-
-  floras_species = FlorasSpecies.create!(
+  FlorasSpecies.create!(
     flora: flora,
     species: species.sample
-  ) 
+  )
   Card.create!(
     typeable: flora,
-    name: Faker::Name.name, 
+    name: Faker::Name.name,
     description: Faker::Markdown.emphasis
   )
-}
+end
