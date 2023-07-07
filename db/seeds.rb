@@ -2,7 +2,6 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
 
-=begin
 22.times { |index|
   Scenario.create!(
     author: Faker::Name.name,
@@ -12,7 +11,6 @@
     description: Faker::Markdown.emphasis
   )
 }
-=end
  
 # VARIABLES
 builduSpeedType = ["slow", "medium", "fast"]
