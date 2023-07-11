@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :scenarii
       resources :faunas
       resources :floras
+      resources :cards
     end
   end
 

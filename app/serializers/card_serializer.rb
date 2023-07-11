@@ -3,8 +3,16 @@
 class CardSerializer
   include JSONAPI::Serializer
 
-  attributes :name
+  attributes :id, :name, :description, :note, :typeable_type, :typeable_id
   #attributes :medias
+
+  attribute :created_at do |object|
+    object.created_at.strftime("%d/%m/%Y - %H:%m")
+  end
+
+  attribute :updated_at do |object|
+    object.updated_at.strftime("%d/%m/%Y - %H:%m")
+  end
 
   attribute :medias_files do |object|
     object.medias&.map { |media| Rails.application.routes.url_helpers.url_for(media) }
