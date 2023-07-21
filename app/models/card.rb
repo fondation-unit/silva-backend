@@ -1,7 +1,9 @@
 class Card < ApplicationRecord
   belongs_to :typeable, polymorphic: true, optional: true
 
-  validates :name, presence: true
+  has_many_attached :medias
+
+  validates :name, presence: true, length: { minimum: 3 }
   validates :description, presence: true
   validates :note, presence: false
   validates :typeable_type, presence: true

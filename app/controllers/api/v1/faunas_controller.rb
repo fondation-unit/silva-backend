@@ -22,10 +22,12 @@ class Api::V1::FaunasController < ApplicationController
     return unless @fauna.save
 
     @fauna.build_associations(fauna_params)
-
+    options = {
+      include: %i[card animal_scientific_order habitats micro_habitats predators]
+    }
     render json: {
       status: { code: 200, message: "Fauna created successfully." },
-      data: FaunaSerializer.new(@fauna)
+      data: FaunaSerializer.new(@fauna, options), status: :ok
     }
   end
 
@@ -52,7 +54,7 @@ class Api::V1::FaunasController < ApplicationController
     def fauna_params
       params.require(:fauna).permit(
         :animal_scientific_order_id,
-        card_attributes: %i[typeable name description],
+        card_attributes: [:typeable, :name, :description, medias: []],
         habitats_attributes: [],
         micro_habitats_attributes: [],
         predators_attributes: []
