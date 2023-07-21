@@ -1,4 +1,4 @@
-Rails.application.routes.draw do  
+Rails.application.routes.draw do
   devise_for :users, path: "", path_names: {
     sign_in: "login",
     sign_out: "logout",
@@ -17,12 +17,11 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :scenarii
       resources :faunas
+      resources :floras
+      resources :cards
     end
   end
 
   resources :faunas, only: [:create, :update, :destroy]
-  resources :floras
-
-  post "/api/v1/floras", to: "floras#create"
-
+  resources :floras, only: [:create, :update, :destroy]
 end

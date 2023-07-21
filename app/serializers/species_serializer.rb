@@ -1,8 +1,9 @@
-class Species < ApplicationRecord
-  has_many :floras_species, dependent: :destroy
-  has_many :floras, through: :floras_species
+# frozen_string_literal: true
 
-  validates :name, presence: true, length: { minimum: 3 }
+class SpeciesSerializer
+  include JSONAPI::Serializer
+
+  attributes :id, :name
 end
 
 # == Schema Information
